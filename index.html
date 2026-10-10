@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AS Physics: Physical Quantities and Estimation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&family=Monoton&display=swap">
+<style>
+:root{--bg:#eaf0f8;--grid:#d3deee;--ink:#14213d;--mute:#51627f;--acc:#2250e6;--hl:#f59e0b;--card:#fff;--line:#c4d1e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1730;--grid:#18254a;--ink:#e8eefb;--mute:#9db0d3;--acc:#7da2ff;--hl:#fbbf24;--card:#16224a;--line:#2c3c6c}}
+:root[data-theme="dark"]{--bg:#0e1730;--grid:#18254a;--ink:#e8eefb;--mute:#9db0d3;--acc:#7da2ff;--hl:#fbbf24;--card:#16224a;--line:#2c3c6c}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{background-color:var(--bg)}body{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;display:flex;flex-direction:column}
+.bar{height:5px;background:var(--line)}#bar{height:100%;width:0;background:var(--hl);transition:width .35s}
+.slides{flex:1;position:relative;overflow:hidden}
+section{position:absolute;inset:0;padding:5vh 8vw;display:none;flex-direction:column;justify-content:center;overflow-y:auto}
+section.on{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateX(48px) scale(.96);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){section.on{animation:none}#bar{transition:none}}
+h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.02em;margin:0 0 .5em}
+h1{font-size:clamp(2.4rem,8vw,5.5rem);line-height:1;font-weight:800;max-width:14ch}
+h2{font-size:clamp(1.6rem,4vw,2.7rem);font-weight:700;line-height:1.1}
+p,li{font-size:clamp(1rem,1.9vw,1.3rem);line-height:1.55;max-width:62ch}
+ul{padding-left:1.1em;margin:0}li{margin:.45em 0}li::marker{color:var(--acc)}
+.sub{color:var(--mute);font-size:clamp(1.1rem,2.4vw,1.6rem)}
+.eq{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(1.5rem,5.5vw,3.6rem);display:flex;flex-wrap:wrap;align-items:flex-end;gap:.35em;margin:.2em 0 1rem}
+.eq i{font-style:normal;color:var(--mute);font-weight:500}
+.eq .t{display:flex;flex-direction:column;align-items:center;border-bottom:4px solid var(--acc);padding:0 .15em}
+.eq .t small{font:500 .28em "IBM Plex Sans",sans-serif;color:var(--acc);margin-top:.2em;order:2;padding-top:.3em}
+.eq .t.u{border-color:var(--hl)}.eq .t.u small{color:var(--hl)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;margin-top:.8rem;max-width:920px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem}
+.c b{display:block;font:800 clamp(1.6rem,3.4vw,2.4rem)/1 "Bricolage Grotesque",sans-serif;color:var(--acc);margin-bottom:.3rem}
+.c span{color:var(--mute);font-size:.95rem}.c em{font-style:normal;display:block;font-weight:500}
+.wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;font-size:clamp(.95rem,1.9vw,1.25rem);background:var(--card);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55em 1.3em}
+th{background:var(--ink);color:var(--bg);font-weight:500}
+td{border-bottom:1px solid var(--line)}tr:last-child td{border:0}td:last-child{font-weight:500;color:var(--acc)}
+.scale{position:relative;min-width:600px;height:150px;margin-top:1.2rem}
+.scale:before{content:"";position:absolute;left:0;right:0;top:75px;height:3px;background:var(--ink)}
+.scale div{position:absolute;transform:translateX(-50%);text-align:center;font-size:.85rem;white-space:nowrap}
+.scale div:before{content:"";position:absolute;left:50%;width:2px;background:var(--acc);height:24px}
+.scale .a{top:28px}.scale .a:before{top:22px}.scale .b{top:88px}.scale .b:before{top:-12px;height:14px}
+.scale .b:before{top:-14px}
+.scale strong{display:block;color:var(--acc)}
+.scale .p strong{color:var(--hl)}.scale .p:before{background:var(--hl)}
+.steps{display:grid;gap:.8rem;max-width:760px}
+.s{display:grid;grid-template-columns:2.6rem 1fr;gap:1rem;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem}
+.s b{font:800 1.6rem "Bricolage Grotesque",sans-serif;color:var(--hl)}.s p{margin:0}
+.ans{font:800 clamp(1.6rem,4vw,2.6rem) "Bricolage Grotesque",sans-serif;color:var(--acc);margin-top:.8rem}
+nav{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.2rem}
+button{font:500 1rem "IBM Plex Sans",sans-serif;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:.6em 1.5em;cursor:pointer}
+button:focus-visible{outline:3px solid var(--hl);outline-offset:2px}button:disabled{opacity:.3;cursor:default}
+#n{color:var(--mute);font-variant-numeric:tabular-nums}
+
+section.on h1,section.on h2,section.on .sub,section.on .eq,section.on .chips,section.on .c,section.on li,section.on tr,section.on .s,section.on .ans,section.on .out,section.on .sl{animation:pop .6s cubic-bezier(.2,.8,.2,1) backwards}
+section.on .scale div{animation:fade .6s backwards}
+.scale:before{transform-origin:left;animation:grow 1.1s .1s backwards}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.96)}}
+@keyframes fade{from{opacity:0}}
+@keyframes grow{from{transform:scaleX(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.atom{color:var(--acc);animation:spin 16s linear infinite;margin-bottom:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .8rem}
+button.chip{background:var(--card);color:var(--ink);border:2px solid var(--line);padding:.45em 1.1em;transition:background .2s}
+button.chip.on{background:var(--hl);border-color:var(--hl);color:#14213d}
+button.c{text-align:left;color:var(--ink);font-family:inherit;transition:transform .2s,border-color .2s;cursor:pointer}
+button.c:hover{transform:translateY(-4px);border-color:var(--acc)}
+button.c.open{border-color:var(--hl)}
+.c .ex{display:none;margin-top:.5rem;color:var(--ink);font-size:.95rem}
+.c.open .ex{display:block;animation:fade .3s}
+.out{min-height:2.2em;font:700 clamp(1.1rem,2.6vw,1.7rem) "Bricolage Grotesque",sans-serif;color:var(--acc);margin:.8rem 0 0}
+.hint{color:var(--mute);font-size:.95rem;margin:.6rem 0 0}
+input[type=range]{width:min(100%,420px);accent-color:var(--acc);display:block;margin:.4rem 0}
+.sl{margin-bottom:.8rem;font-weight:500}.sl output{color:var(--hl);font-weight:700}
+.opts{display:grid;gap:.6rem;max-width:560px;margin:.6rem 0}
+.opts button{background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:10px;text-align:left}
+.opts button.ok{border-color:#16a34a;background:rgba(22,163,74,.18)}
+.opts button.no{border-color:#dc2626;background:rgba(220,38,38,.18)}
+.fb{min-height:3em;margin:.4rem 0}
+.bar,nav{position:relative;z-index:2}.slides{z-index:1}
+.orbs{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.orbs i{position:absolute;border-radius:50%;filter:blur(50px);animation:drift 18s ease-in-out infinite alternate}
+.orbs i:nth-child(1){width:40vmax;height:40vmax;background:var(--acc);left:-10vmax;top:-12vmax;opacity:.28}
+.orbs i:nth-child(2){width:32vmax;height:32vmax;background:var(--hl);right:-12vmax;bottom:-10vmax;animation-duration:24s;opacity:.2}
+.orbs i:nth-child(3){width:22vmax;height:22vmax;background:#ec4899;left:45%;top:55%;animation-duration:30s;opacity:.12}
+@keyframes drift{to{transform:translate(8vw,6vh) scale(1.2)}}
+.tag{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:16px;z-index:5;pointer-events:none;font:400 1rem Monoton,"Bricolage Grotesque",sans-serif;letter-spacing:.08em;color:var(--hl)}
+.by{font:400 clamp(1.6rem,5vw,3rem) Monoton,"Bricolage Grotesque",sans-serif;letter-spacing:.06em;margin-top:1.2rem;background:linear-gradient(90deg,var(--acc),var(--hl),#ec4899,var(--acc));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite,pop .8s 1.2s backwards}
+@keyframes shine{to{background-position:-300% 0}}
+.w{display:inline-block;white-space:nowrap}.ch{display:inline-block}
+section.on .ch{animation:drop .8s cubic-bezier(.2,1.5,.4,1) backwards}
+@keyframes drop{from{opacity:0;transform:translateY(-60px) rotate(-12deg) scale(.5);filter:blur(6px)}}
+button.c:hover{box-shadow:0 10px 24px rgba(34,80,230,.3)}
+.cf{position:fixed;top:-16px;width:9px;height:14px;z-index:50;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
+#pc{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,40%),rgba(245,158,11,.18),transparent 70%)}
+#bar{background:linear-gradient(90deg,var(--acc),#ec4899,var(--hl));box-shadow:0 0 14px var(--hl)}
+h2{width:fit-content;max-width:100%;background:linear-gradient(90deg,var(--ink) 30%,var(--acc));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.c{transition:transform .15s,border-color .2s,box-shadow .2s}
+.spark{position:fixed;width:8px;height:8px;border-radius:50%;z-index:60;pointer-events:none;background:var(--hl);animation:spark .7s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+#snd{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:12px;z-index:6;font-size:.85rem;padding:.35em .9em;background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.nuc{transform-box:fill-box;transform-origin:center;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.5)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.orbs,.cf,.spark,#pc,.glow{display:none}}
+</style></head><body>
+<div class="orbs"><i></i><i></i><i></i></div><canvas id="pc"></canvas><div class="glow"></div><button id="snd" aria-pressed="true">Sound on</button>
+<div class="tag">Made by Sharo</div>
+<div class="bar"><div id="bar"></div></div>
+<div class="slides">
+
+<section class="on"><svg class="atom" viewBox="-64 -64 128 128" width="190" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><g><ellipse rx="54" ry="19"/><circle r="4.5" fill="var(--hl)" stroke="none"><animateMotion dur="2.8s" repeatCount="indefinite" path="M54 0A54 19 0 1 1 -54 0A54 19 0 1 1 54 0"/></circle></g><g transform="rotate(60)"><ellipse rx="54" ry="19"/><circle r="4.5" fill="#ec4899" stroke="none"><animateMotion dur="3.6s" repeatCount="indefinite" path="M54 0A54 19 0 1 1 -54 0A54 19 0 1 1 54 0"/></circle></g><g transform="rotate(120)"><ellipse rx="54" ry="19"/><circle r="4.5" fill="#06b6d4" stroke="none"><animateMotion dur="4.4s" repeatCount="indefinite" path="M54 0A54 19 0 1 1 -54 0A54 19 0 1 1 54 0"/></circle></g></g><circle class="nuc" r="7" fill="var(--hl)"/></svg><h1>Physical quantities and estimation</h1>
+<p class="sub">AS Level Physics. Units, magnitudes and sensible guesses.</p><div class="by">Made by Sharo</div></section>
+
+<section><h2>Every physical quantity has two parts</h2>
+<div class="eq"><span>quantity</span><i>=</i><span class="t"><span>12</span><small>numerical magnitude</small></span><i>×</i><span class="t u"><span id="eu">m s⁻¹</span><small>unit</small></span></div>
+<p class="hint" style="margin:0 0 .4rem">Try it: pick a unit.</p>
+<div class="chips"><button class="chip on" data-u="m s⁻¹" data-q="speed">m s⁻¹</button><button class="chip" data-u="kg" data-q="mass">kg</button><button class="chip" data-u="s" data-q="time">s</button><button class="chip" data-u="A" data-q="current">A</button><button class="chip" data-u="K" data-q="temperature">K</button></div>
+<p class="out" id="q2">12 m s⁻¹ is a speed. Same number, different unit, different quantity.</p>
+<ul><li>A number alone means nothing: "5" could be 5 s, 5 m or 5 kg.</li></ul></section>
+
+<section><h2>SI base units you need at AS Level</h2>
+<p class="hint" style="margin:0">Tap a card for an example.</p>
+<div class="grid">
+<button class="c" data-ex="A bag of sugar is about 1 kg."><b>kg</b><em>kilogram</em><span>mass</span><span class="ex"></span></button>
+<button class="c" data-ex="A long stride is about 1 m."><b>m</b><em>metre</em><span>length</span><span class="ex"></span></button>
+<button class="c" data-ex="One heartbeat is about 1 s."><b>s</b><em>second</em><span>time</span><span class="ex"></span></button>
+<button class="c" data-ex="A phone charger gives about 1 A."><b>A</b><em>ampere</em><span>electric current</span><span class="ex"></span></button>
+<button class="c" data-ex="A room is about 293 K (20 °C)."><b>K</b><em>kelvin</em><span>thermodynamic temperature</span><span class="ex"></span></button>
+<button class="c" data-ex="12 g of carbon-12 is 1 mol."><b>mol</b><em>mole</em><span>amount of substance</span><span class="ex"></span></button></div></section>
+
+<section><h2>Derived units and prefixes</h2>
+<p style="margin:0">Derived units are built from base units. Write them in index form, such as m s⁻¹ rather than m/s.</p>
+<div class="grid">
+<div class="c"><b>N</b><em>force</em><span>kg m s⁻²</span></div>
+<div class="c"><b>J</b><em>energy</em><span>kg m² s⁻²</span></div>
+<div class="c"><b>W</b><em>power</em><span>kg m² s⁻³</span></div>
+<div class="c"><b>Pa</b><em>pressure</em><span>kg m⁻¹ s⁻²</span></div></div>
+<p class="hint">Tap a prefix to see what it means:</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(80px,1fr));margin-top:.3rem">
+<button class="c pf" data-t="1 nm = 10⁻⁹ m = 0.000 000 001 m"><b>n</b><span>10⁻⁹</span></button>
+<button class="c pf" data-t="1 µm = 10⁻⁶ m = 0.000 001 m"><b>µ</b><span>10⁻⁶</span></button>
+<button class="c pf" data-t="1 mm = 10⁻³ m = 0.001 m"><b>m</b><span>10⁻³</span></button>
+<button class="c pf" data-t="1 km = 10³ m = 1000 m"><b>k</b><span>10³</span></button>
+<button class="c pf" data-t="1 Mm = 10⁶ m = 1 000 000 m"><b>M</b><span>10⁶</span></button>
+<button class="c pf" data-t="1 Gm = 10⁹ m = 1 000 000 000 m"><b>G</b><span>10⁹</span></button></div>
+<p class="out" id="pf">1 km = 10³ m = 1000 m</p></section>
+
+<section><h2>Making reasonable estimates</h2>
+<ul><li>An estimate is a sensible order of magnitude, not an exact value.</li>
+<li>Compare with something familiar, then round to one significant figure.</li>
+<li>Check the unit and the power of ten. Is the answer plausible?</li></ul>
+<p style="margin-bottom:0">Lengths in metres, on a scale of powers of ten:</p>
+<div class="wrap"><div class="scale">
+<div class="a" style="left:3%"><strong>10⁻¹⁰ m</strong>atom</div>
+<div class="b" style="left:28%"><strong>10⁻⁵ m</strong>red blood cell</div>
+<div class="a" style="left:39%"><strong>10⁻³ m</strong>ant</div>
+<div class="b p" style="left:57%"><strong>1.7 m</strong>person</div>
+<div class="a" style="left:67%"><strong>10² m</strong>football pitch</div>
+<div class="b" style="left:78%"><strong>10⁴ m</strong>Mount Everest</div>
+<div class="a" style="left:94%"><strong>10⁷ m</strong>Earth</div></div></div></section>
+
+<section><h2>Typical values to remember</h2>
+<div class="wrap"><table><tr><th>Quantity</th><th>Estimate</th></tr>
+<tr><td>Mass of an adult</td><td>70 kg</td></tr>
+<tr><td>Mass of an apple</td><td>0.1 kg</td></tr>
+<tr><td>Walking speed</td><td>1.5 m s⁻¹</td></tr>
+<tr><td>Car speed on a motorway</td><td>30 m s⁻¹</td></tr>
+<tr><td>Time between heartbeats</td><td>1 s</td></tr>
+<tr><td>Room temperature</td><td>293 K (20 °C)</td></tr>
+<tr><td>UK mains voltage</td><td>230 V</td></tr></table></div></section>
+
+<section><h2>Worked example: a cyclist's kinetic energy</h2>
+<div class="sl"><label for="vs">Drag to change the speed: v = <output id="vo">5</output> m s⁻¹</label><input type="range" id="vs" min="1" max="15" value="5"></div>
+<div class="steps">
+<div class="s"><b>1</b><p>Estimate: cyclist and bike m ≈ 80 kg, speed v ≈ <span id="v1">5</span> m s⁻¹.</p></div>
+<div class="s"><b>2</b><p>E = ½mv² = ½ × 80 × <span id="v2">5</span>² = <span id="e1">1000</span> J.</p></div>
+<div class="s"><b>3</b><p id="chk">Check: the unit is the joule and the size is plausible.</p></div></div>
+<div class="ans" id="ans">E ≈ 1 × 10³ J</div></section>
+
+<section><h2>Quick quiz: test your estimates</h2><div id="qz"></div></section>
+</div>
+<nav><button id="p">Previous</button><span id="n"></span><button id="x">Next</button></nav>
+<script>
+var s=document.querySelectorAll("section"),i=0,n=document.getElementById("n"),p=document.getElementById("p"),x=document.getElementById("x"),b=document.getElementById("bar");
+function go(k){i=Math.max(0,Math.min(s.length-1,k));s.forEach(function(e,j){e.classList.toggle("on",j==i)});n.textContent=(i+1)+" / "+s.length;p.disabled=i==0;x.disabled=i==s.length-1;b.style.width=((i+1)/s.length*100)+"%";
+s[i].querySelectorAll("h1,h2,.sub,.eq,.chips,.c,li,tr,.s,.ans,.out,.sl,.scale div").forEach(function(e,j){e.style.animationDelay=(j*70)+"ms"})}
+p.onclick=function(){go(i-1)};x.onclick=function(){go(i+1)};
+document.addEventListener("keydown",function(e){var t=e.target.tagName;if(t=="INPUT")return;if(e.key==" "&&t=="BUTTON")return;if(e.key=="ArrowRight"||e.key==" ")go(i+1);if(e.key=="ArrowLeft")go(i-1)});
+var t0=null;document.addEventListener("touchstart",function(e){t0=e.target.tagName=="INPUT"?null:e.touches[0].clientX});
+document.addEventListener("touchend",function(e){if(t0===null)return;var d=e.changedTouches[0].clientX-t0;if(Math.abs(d)>60)go(i+(d<0?1:-1))});
+document.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){document.querySelectorAll(".chip").forEach(function(d){d.classList.remove("on")});c.classList.add("on");document.getElementById("eu").textContent=c.dataset.u;document.getElementById("q2").textContent="12 "+c.dataset.u+" is a "+c.dataset.q+". Same number, different unit, different quantity."}});
+document.querySelectorAll("button.c[data-ex]").forEach(function(c){c.querySelector(".ex").textContent=c.dataset.ex;c.onclick=function(){c.classList.toggle("open")}});
+document.querySelectorAll(".pf").forEach(function(c){c.onclick=function(){document.getElementById("pf").textContent=c.dataset.t}});
+var vs=document.getElementById("vs");function ke(){var v=+vs.value,e=40*v*v;["vo","v1","v2"].forEach(function(id){document.getElementById(id).textContent=v});document.getElementById("e1").textContent=e.toLocaleString("en-GB");document.getElementById("ans").textContent="E = "+e.toLocaleString("en-GB")+" J";document.getElementById("chk").textContent=v<=3?"Check: a slow ride. The energy is small.":v<=8?"Check: a typical cycling speed. Plausible.":"Check: very fast for a cyclist. Is that realistic?"}
+vs.oninput=ke;
+var Q=[{q:"Estimate the mass of an apple.",o:["0.1 kg","1 kg","10 kg","0.001 kg"],a:0,w:"An apple is about 100 g, so 0.1 kg."},{q:"Estimate a typical walking speed.",o:["0.15 m s⁻¹","15 m s⁻¹","1.5 m s⁻¹","150 m s⁻¹"],a:2,w:"About 5 km per hour, which is roughly 1.5 m s⁻¹."},{q:"The newton (N) is the same as:",o:["kg m² s⁻²","kg m s⁻²","kg s⁻²","m s⁻²"],a:1,w:"F = ma, so N = kg × m s⁻² = kg m s⁻²."},{q:"Estimate the height of a classroom door.",o:["20 m","0.2 m","2 m","200 m"],a:2,w:"About 2 m, a little taller than most people."}],qi=0,sc=0;
+function qz(){var el=document.getElementById("qz");if(qi>=Q.length){if(sc>=3)confetti(80);el.innerHTML='<div class="ans">Score: '+sc+' / '+Q.length+'</div><p>'+(sc==Q.length?"Perfect estimating!":"Go back through the slides and try again.")+'</p><button id="rs">Try again</button>';document.getElementById("rs").onclick=function(){qi=0;sc=0;qz()};return}
+var c=Q[qi];el.innerHTML='<p><strong>Question '+(qi+1)+' of '+Q.length+'.</strong> '+c.q+'</p><div class="opts">'+c.o.map(function(t,k){return '<button data-k="'+k+'">'+t+'</button>'}).join("")+'</div><p class="fb" id="fb"></p>';
+var bs=el.querySelectorAll(".opts button"),done=false;bs.forEach(function(bt){bt.onclick=function(){if(done)return;done=true;var k=+bt.dataset.k;if(k==c.a){sc++;confetti(24);tone(660,.12);tone(880,.2,.1)}else{tone(180,.3,0,.1)}bs[c.a].classList.add("ok");if(k!=c.a)bt.classList.add("no");document.getElementById("fb").textContent=(k==c.a?"Correct. ":"Not quite. ")+c.w;var nb=document.createElement("button");nb.textContent=qi==Q.length-1?"See score":"Next question";nb.onclick=function(){qi++;qz()};el.appendChild(nb)}})}
+function confetti(n){var cols=["#2250e6","#f59e0b","#16a34a","#ec4899","#06b6d4"];for(var k=0;k<n;k++){var d=document.createElement("i");d.className="cf";d.style.left=Math.random()*100+"vw";d.style.background=cols[k%5];d.style.animationDuration=(1.6+Math.random()*1.6)+"s";d.style.animationDelay=(Math.random()*.4)+"s";document.body.appendChild(d);setTimeout(function(e){e.remove()},3800,d)}}
+document.querySelectorAll("h1").forEach(function(h){var c=0;h.innerHTML=h.textContent.split(" ").map(function(w){return '<span class="w">'+w.split("").map(function(ch){return '<span class="ch" style="animation-delay:'+(c++*45+200)+'ms">'+ch+'</span>'}).join("")+'</span>'}).join(" ")});
+var ac=null,son=true;
+function tone(f,d,t,v){if(!son)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();var o=ac.createOscillator(),g=ac.createGain(),n0=ac.currentTime+(t||0);o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(v||.08,n0);g.gain.exponentialRampToValueAtTime(.0001,n0+d);o.connect(g);g.connect(ac.destination);o.start(n0);o.stop(n0+d)}catch(e){}}
+document.getElementById('snd').onclick=function(){son=!son;this.textContent=son?'Sound on':'Sound off';this.setAttribute('aria-pressed',son);tone(600,.1)};
+var _g=go;go=function(k){var o=i;_g(k);if(i!=o)tone(500+i*40,.12)};
+document.addEventListener('click',function(e){for(var k=0;k<10;k++){var d=document.createElement('i');d.className='spark';var a=Math.PI*2*k/10,r=30+Math.random()*30;d.style.left=(e.clientX-4)+'px';d.style.top=(e.clientY-4)+'px';d.style.setProperty('--dx',Math.cos(a)*r+'px');d.style.setProperty('--dy',Math.sin(a)*r+'px');document.body.appendChild(d);setTimeout(function(q){q.remove()},800,d)}});
+var mx=-999,my=-999;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;var st=document.documentElement.style;st.setProperty('--mx',mx+'px');st.setProperty('--my',my+'px');var c=e.target.closest&&e.target.closest('.c');if(c){var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(600px) rotateX('+(-py*14)+'deg) rotateY('+(px*14)+'deg) translateY(-4px)'}});
+document.addEventListener('mouseout',function(e){var c=e.target.closest&&e.target.closest('.c');if(c&&!c.contains(e.relatedTarget))c.style.transform=''});
+document.addEventListener('touchmove',function(e){mx=e.touches[0].clientX;my=e.touches[0].clientY});
+var cv=document.getElementById('pc'),cx=cv.getContext('2d'),W,H,P=[],col='#2250e6',fr=0,rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=[];var N=Math.min(70,Math.floor(W*H/22000));for(var k=0;k<N;k++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5})}
+rs();addEventListener('resize',rs);
+function draw(){if(fr++%30==0)col=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||col;cx.clearRect(0,0,W,H);cx.fillStyle=col;cx.strokeStyle=col;for(var a=0;a<P.length;a++){var p=P[a];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;var dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<120&&d>0){p.x+=dx/d*1.6;p.y+=dy/d*1.6}cx.globalAlpha=.7;cx.beginPath();cx.arc(p.x,p.y,2,0,6.3);cx.fill();for(var b2=a+1;b2<P.length;b2++){var q=P[b2],ex=p.x-q.x,ey=p.y-q.y,e2=Math.sqrt(ex*ex+ey*ey);if(e2<120){cx.globalAlpha=(1-e2/120)*.45;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}}requestAnimationFrame(draw)}
+if(!rm)draw();
+qz();go(0);
+</script></body></html>
